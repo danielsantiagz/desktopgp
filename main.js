@@ -9,7 +9,7 @@ mb.setOption('index', `file://${__dirname}/index.html`)
 
 mb.on('ready', function ready () {
 
-	   
+
      if (process.platform === "linux"){
        mb.tray.setToolTip('show app')
      }
@@ -17,11 +17,11 @@ mb.on('ready', function ready () {
   	// your app code here
 })
 
-app.on('ready', () => {
-  let win = new BrowserWindow({width:800, height:600})
-  win.loadURL(`file://${__dirname}/index.html`)
-  win.webContents.openDevTools()
-})
+// app.on('ready', () => {
+//   let win = new BrowserWindow({width:800, height:600})
+//   win.loadURL(`file://${__dirname}/index.html`)
+//   win.webContents.openDevTools()
+// })
 
 exports.openWindow = () => {
   let win = new BrowserWindow({width:400, height:200})
