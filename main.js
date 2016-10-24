@@ -1,13 +1,18 @@
 const menubar = require('menubar')
 const electron = require('electron')
-const {app, BrowserWindow, Tray} = electron
+const {app, BrowserWindow} = electron
+const openpgp = require('openpgp')
+
+var tray = electron.Tray
 var mb = menubar()
 mb.setOption('index', `file://${__dirname}/index.html`)
 
 mb.on('ready', function ready () {
-	if (process.platform === 'linux'){
-		mb.Tray.setToolTip('Show Keybase')
-	}	
+
+	   
+     if (process.platform === "linux"){
+       mb.tray.setToolTip('show app')
+     }
   	console.log('app is ready')
   	// your app code here
 })
