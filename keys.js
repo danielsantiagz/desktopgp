@@ -54,7 +54,7 @@ ZIUid/+AdxifE2cLOaP4SNmjWE67vZZRF4wkUyk4AmXQNq2JzFKN
 =B5Mp
 -----END PGP PUBLIC KEY BLOCK-----`;
 
-privkey = `-----BEGIN PGP PRIVATE KEY BLOCK-----
+var privkey = `-----BEGIN PGP PRIVATE KEY BLOCK-----
 Version: OpenPGP.js v2.3.3
 Comment: http://openpgpjs.org
 

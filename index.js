@@ -18,5 +18,5 @@ function encryptFunc(){
 }
 
 function decryptFunc(){
-	main.decrypt('msg', 'privateKey')
+	main.Decrypt('msg', 'privateKey')
 }
