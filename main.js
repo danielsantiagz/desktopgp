@@ -8,6 +8,8 @@ var key = require('./keys2.js');
 var enc = ''
 var pubkey = key.pub
 var privkey = key.priv
+var pubkey2 = key.pub2
+var privkey2 = key.priv2
 // console.log(pubkey)
 var msg = "hola"
 
@@ -128,3 +130,32 @@ exports.generate = function(){
 	});
 
 }
+
+
+// Sign function  ..........................................//
+
+
+
+exports.Sign = function(msg, privateKey){
+  console.log("signing")
+
+  options ={
+    data: "hola",
+    privateKeys: openpgp.key.readArmored(privkey2).keys[0],
+    armor: true
+  };
+
+  openpgp.sign(options).then(function(signedMessage){
+    console.log('before signing')
+    console.log(signedMessage.data)
+    console.log('after signing')
+    return signedMessage.data
+  });
+  console.log
+
+}
+
+// console.log(openpgp.message.readArmored(sigmsg))
+// function sign_message()
+//   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
+//   console.log(sigmsg)

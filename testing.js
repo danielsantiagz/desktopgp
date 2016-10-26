@@ -3,6 +3,7 @@ openpgp.initWorker({ path:'openpgp.worker.js' })
 // var llaves = require('./keys2.js')
 
 
+
 // var options, encrypted;
 
 // // var pubkey = '-----BEGIN PGP PUBLIC KEY BLOCK ... END PGP PUBLIC KEY BLOCK-----';
@@ -66,16 +67,16 @@ openpgp.initWorker({ path:'openpgp.worker.js' })
 // });
 // console.log(encrypted)
 
-	var options = {
-	    userIds: [{ name:'Jon papa', email:'jonpapa@example.com' }], // multiple user IDs
-	    numBits: 1024,                                            // RSA key size
-	    passphrase: 'jon'         // protects the private key
-	};
-
-	openpgp.generateKey(options).then(function(key) {
-	    var privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
-	    var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
-	    console.log('yei')
-	    console.log(privkey)
-	    console.log(pubkey)
-	});
+	// var options = {
+	//     userIds: [{ name:'Jon papa', email:'jonpapa@example.com' }], // multiple user IDs
+	//     numBits: 1024,                                            // RSA key size
+	//     passphrase: 'jon'         // protects the private key
+	// };
+	//
+	// openpgp.generateKey(options).then(function(key) {
+	//     var privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
+	//     var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
+	//     console.log('yei')
+	//     console.log(privkey)
+	//     console.log(pubkey)
+	// });

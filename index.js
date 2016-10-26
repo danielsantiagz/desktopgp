@@ -20,3 +20,7 @@ function encryptFunc(){
 function decryptFunc(){
 	main.Decrypt('msg', 'privateKey')
 }
+
+function signFunc(){
+	main.Sign('msg', 'privateKey')
+}
