@@ -1,4 +1,5 @@
 var openpgp = require('openpgp')
+openpgp.initWorker({ path:'openpgp.worker.js' })
 var llaves = require('./keys2.js')
 
 
@@ -10,32 +11,37 @@ var pubkey = llaves.pub
 var privkey = llaves.priv
 
 // console.log(pubkey)
-// options = {
-//     data: 'Hello, World!',                             // input as String (or Uint8Array)
-//     publicKeys: openpgp.key.readArmored(pubkey).keys,  // for encryption
-//     privateKeys: openpgp.key.readArmored(privkey).keys // for signing (optional)
-// };
+
+options = {
+    data: 'Hello, World!',                             // input as String (or Uint8Array)
+    publicKeys: openpgp.key.readArmored(pubkey).keys,  // for encryption
+    privateKeys: openpgp.key.readArmored(privkey).keys // for signing (optional)
+};
+
+//prueba pendeja 
+// encrypted = openpgp.encrypt(options);
+// console.log(encrypted)
+// console.log(openpgp.message.readArmored(encrypted))
+
 
 // openpgp.encrypt(options).then(function(ciphertext) {
+//     console.log("hello")
 //     encrypted = ciphertext.data; // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
 //     console.log(encrypted)
 // });
 
-var encrypted = "-----BEGIN PGP MESSAGE----- \
-Version: OpenPGP.js v2.3.3 \
-Comment: http://openpgpjs.org \
-\
-1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV \
-AVjiN3rZbRTKSqLkdhA= \
-=o3fo \
------END PGP MESSAGE-----"
 
-options = {
-    message: openpgp.message.readArmored(encrypted),     // parse armored message
-    publicKeys: openpgp.key.readArmored(pubkey).keys,    // for verification (optional)
-    privateKey: openpgp.key.readArmored(privkey).keys[0] // for decryption
-};
-
-openpgp.decrypt(options).then(function(plaintext) {
-    console.log(plaintext.data) // 'Hello, World!'
-});
+// options = {
+//     message: openpgp.message.readArmored(encrypted),     // parse armored message
+//     publicKeys: openpgp.key.readArmored(pubkey).keys,    // for verification (optional)
+//     privateKey: openpgp.key.readArmored(privkey).keys[0] // for decryption
+// };
+//
+// openpgp.decrypt(options).then(function(plaintext) {
+//     console.log(plaintext.data) // 'Hello, World!'
+// });
+//
+// var str = `Hello
+// world`;
+// console.log(`hello
+//   world`);
