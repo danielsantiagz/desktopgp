@@ -21,14 +21,14 @@ var privkey = llaves.priv
 //     console.log(encrypted)
 // });
 
-var encrypted = "-----BEGIN PGP MESSAGE----- \
-Version: OpenPGP.js v2.3.3 \
-Comment: http://openpgpjs.org \
-\
-1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV \
-AVjiN3rZbRTKSqLkdhA= \
-=o3fo \
------END PGP MESSAGE-----"
+var encrypted = ['-----BEGIN PGP MESSAGE-----',
+'Version: OpenPGP.js v2.3.3',
+'Comment: http://openpgpjs.org',
+'',
+'1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV',
+'AVjiN3rZbRTKSqLkdhA=',
+'=o3fo',
+'-----END PGP MESSAGE-----'].join('\n');
 
 options = {
     message: openpgp.message.readArmored(encrypted),     // parse armored message
@@ -39,3 +39,4 @@ options = {
 openpgp.decrypt(options).then(function(plaintext) {
     console.log(plaintext.data) // 'Hello, World!'
 });
+console.log(encrypted)
