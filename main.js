@@ -90,82 +90,10 @@ exports.encrypt = function(msg, publicKey){
 
 exports.Decrypt = function(msg, privateKey){
 	console.log('decrypt')
-
-// 	var encrypted = `-----BEGIN PGP MESSAGE-----
-// Version: OpenPGP.js v2.3.3
-// Comment: http://openpgpjs.org
-//
-// wcFMA/gCEr0q9qCKAQ/8DdNc6W3f/IC/u3qeHhXRo2h+XZ7C0Z+Lg6HDrMoz
-// EpW2979KUINZNs8ewq3ITDHuS1Z+gOjp/hY5Td9ya9di308CrW4x1CsimGA4
-// gClLW9Xj2GqSfYbIFCJY0koQ8ma7YhK6fjuu/K5HGZhoJ3RQfk6l6HSQfKMo
-// lYomsqsDnAakMai6LFYnnxUXqUPWDbraqz0EyhUoZ9NE8kjWx4XMJd5FDszS
-// oJP4zpcPS15HQ3ovsQDW97rQ4yJgp6ba8LAaUKI734Sf2RBi6tYCkTG9yuDK
-// HfBS6c08KHj7HAg54jbdgMO3ISCr3xKwkeOpnyOOoUCzhl5lnt28ARM1clcU
-// s8S1aTxcoVx1hd8E3L04uHkB4vs+p2nuC0sLJ3T5R8KHLEHjgOIji0uInzfm
-// rTpzwJkHvVS7R3GVHz1ypZ9XVgJcgP06yfJmhncvLIgcL4dCCEngbmD1ARFJ
-// JwupyAZW5fGoc3n8UC1BYgjAmgofSubvIPyzpySd2iTIlArMF9G7xduuoaX0
-// lqxwJhbWWYgriFSjLGD8Yc/6KsTX4KI3OiMc1gLnuFk61K6b2Brs0f4fFPol
-// piYCpbIgd/49bl/tWPOBZVGt2xITPCKbUUITtHm3+icnILFdrp6enNDtzSEK
-// GkVO0TATo/wids9h6uNo1J/zWiEYNc6K3yc1LVu8sJzUOQHl6cTRq30m/vml
-// O2h4cCJNRiyh/92Ed4vafYJwotErZyirExzh279CEGoI9IeLII5Jx5GZY8Nl
-// 1Q==
-// =5nWn
-// -----END PGP MESSAGE-----`
-// var encrypted = "-----BEGIN PGP MESSAGE-----\
-// Version: OpenPGP.js v2.3.3\
-// Comment: http://openpgpjs.org\
-// \
-// wcFMA/gCEr0q9qCKAQ/8DdNc6W3f/IC/u3qeHhXRo2h+XZ7C0Z+Lg6HDrMoz\
-// EpW2979KUINZNs8ewq3ITDHuS1Z+gOjp/hY5Td9ya9di308CrW4x1CsimGA4\
-// gClLW9Xj2GqSfYbIFCJY0koQ8ma7YhK6fjuu/K5HGZhoJ3RQfk6l6HSQfKMo\
-// lYomsqsDnAakMai6LFYnnxUXqUPWDbraqz0EyhUoZ9NE8kjWx4XMJd5FDszS\
-// oJP4zpcPS15HQ3ovsQDW97rQ4yJgp6ba8LAaUKI734Sf2RBi6tYCkTG9yuDK\
-// HfBS6c08KHj7HAg54jbdgMO3ISCr3xKwkeOpnyOOoUCzhl5lnt28ARM1clcU\
-// s8S1aTxcoVx1hd8E3L04uHkB4vs+p2nuC0sLJ3T5R8KHLEHjgOIji0uInzfm\
-// rTpzwJkHvVS7R3GVHz1ypZ9XVgJcgP06yfJmhncvLIgcL4dCCEngbmD1ARFJ\
-// JwupyAZW5fGoc3n8UC1BYgjAmgofSubvIPyzpySd2iTIlArMF9G7xduuoaX0\
-// lqxwJhbWWYgriFSjLGD8Yc/6KsTX4KI3OiMc1gLnuFk61K6b2Brs0f4fFPol\
-// piYCpbIgd/49bl/tWPOBZVGt2xITPCKbUUITtHm3+icnILFdrp6enNDtzSEK\
-// GkVO0TATo/wids9h6uNo1J/zWiEYNc6K3yc1LVu8sJzUOQHl6cTRq30m/vml\
-// O2h4cCJNRiyh/92Ed4vafYJwotErZyirExzh279CEGoI9IeLII5Jx5GZY8Nl\
-// 1Q==\
-// =5nWn\
-// -----END PGP MESSAGE-----"
-
-// var encrypted = ['-----BEGIN PGP MESSAGE-----',
-// 'Version: OpenPGP.js v2.3.3',
-// 'Comment: http://openpgpjs.org',
-// '',
-// '1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV',
-// 'AVjiN3rZbRTKSqLkdhA=',
-// '=o3fo',
-// '-----END PGP MESSAGE-----'].join('\n');
-
-var encrypted = ['-----BEGIN PGP MESSAGE-----',
-'Version: OpenPGP.js v2.3.3',
-'Comment: http://openpgpjs.org',
-'',
-'wcFMA/gCEr0q9qCKAQ/8CH+t1KeRgHC0sK+lVfUgO2Z+EQRNN2fG2nB9cZiG',
-'qcoeOGeKiURXwWFW72b/55CF7WSVe44T/5v/FzdDNv6mUYc+F9UfBmp/HY62',
-'/N3m0Bahh19e2UpXPWt51Ys3OE0qCGmMBlVX1plCgh/bMsfsOLpgCvsHEnOu',
-'QLg59Gr6mhF+ullVwrbwahj8vvbMhndp0xBhSVPfo+h/dCpJbdA359OsiAsO',
-'rR/YP4aJdcy2Pu5D0Jp6rRYd1P81iZ60CEQsijrouQFeQcX1PnKUkWh/XWE7',
-'cvSxYnu1+3mNPiESXTNsMqNxiDOeqc2vK4ek8KLB8KPPMQ9LhsQycFKKaLJM',
-'Jj3oyadF9FxJPofoxDW0EJ2rUzViW0J/ZwPJGQn+nQbirra0fywIFUL+SPc+',
-'BB3ZDDd6vmf+QrJGiyFkMeuCckDv0ogEbdZQH5SNBs+52g3Wj1o9/3kmVbF6',
-'XMrMRHbmRdCaSewxOzHig2pUhtqNM7S1J8WxmrIc+rIEU1oKGOok3NOte5Py',
-'0cVT+zfa0/F1nHYlqUmNfyrYDdbUmm7GVr+QrqLftxc10YtjDIMLkZakCWeM',
-'r4RmiMAINByirOjQIS/q7RSuOkqlCl+o4W5L47BuZbLDpLo9LC1H03DqLFcQ',
-'71It0ru3IstDu7Lz0liAyuDjvpnLoRig7cE/zvH1wOTDLgQJAwggpN6siFtR',
-'7GCTQhMZyP+nIGeU9OzeUftJO4oYLU4OXDBqscNcb/uYrenUNgGEeIw8trq4',
-'6op1ngDQ29BVY/NeHEuGOM6msxUFwSTP9TSi37Nh674xTh4a4q+ayt+E33bK',
-'Hg==',
-'=xGsm',
-'-----END PGP MESSAGE-----'].join('\n');
+	var encrypted = key.enc
 
 	options = {
 	    message: openpgp.message.readArmored(encrypted),     // parse armored message
-	    // publicKeys: openpgp.key.readArmored(pubkey).keys,    // for verification (optional)
 	    privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
 	    password: 'secret stuff'
 	};
@@ -178,44 +106,25 @@ var encrypted = ['-----BEGIN PGP MESSAGE-----',
 	    console.log('dsps')
 	    return plaintext.data; // 'Hello, World!'
 	});
+
+	console.log('antes')
+	generate()
 }
 
-// }
-// encrypted = `-----BEGIN PGP MESSAGE-----
-// Version: OpenPGP.js v2.3.3
-// Comment: http://openpgpjs.org
-//
-// wcFMA/gCEr0q9qCKAQ/8DdNc6W3f/IC/u3qeHhXRo2h+XZ7C0Z+Lg6HDrMoz
-// EpW2979KUINZNs8ewq3ITDHuS1Z+gOjp/hY5Td9ya9di308CrW4x1CsimGA4
-// gClLW9Xj2GqSfYbIFCJY0koQ8ma7YhK6fjuu/K5HGZhoJ3RQfk6l6HSQfKMo
-// lYomsqsDnAakMai6LFYnnxUXqUPWDbraqz0EyhUoZ9NE8kjWx4XMJd5FDszS
-// oJP4zpcPS15HQ3ovsQDW97rQ4yJgp6ba8LAaUKI734Sf2RBi6tYCkTG9yuDK
-// HfBS6c08KHj7HAg54jbdgMO3ISCr3xKwkeOpnyOOoUCzhl5lnt28ARM1clcU
-// s8S1aTxcoVx1hd8E3L04uHkB4vs+p2nuC0sLJ3T5R8KHLEHjgOIji0uInzfm
-// rTpzwJkHvVS7R3GVHz1ypZ9XVgJcgP06yfJmhncvLIgcL4dCCEngbmD1ARFJ
-// JwupyAZW5fGoc3n8UC1BYgjAmgofSubvIPyzpySd2iTIlArMF9G7xduuoaX0
-// lqxwJhbWWYgriFSjLGD8Yc/6KsTX4KI3OiMc1gLnuFk61K6b2Brs0f4fFPol
-// piYCpbIgd/49bl/tWPOBZVGt2xITPCKbUUITtHm3+icnILFdrp6enNDtzSEK
-// GkVO0TATo/wids9h6uNo1J/zWiEYNc6K3yc1LVu8sJzUOQHl6cTRq30m/vml
-// O2h4cCJNRiyh/92Ed4vafYJwotErZyirExzh279CEGoI9IeLII5Jx5GZY8Nl
-// 1Q==
-// =5nWn
-// -----END PGP MESSAGE-----`
-// function Decrypt(msg,privateKey){
-//   encrypted = msg
-//   options = {
-//     message: openpgp.message.readArmored(encrypted),
-//     publicKeys: openpgp.key.readArmored(pubkey).keys,
-//     privateKey: openpgp.key.readArmored(privkey).keys[0]
-//
-//   };
-//   openpgp.decrypt(options).then(function(plaintext) {
-//     console.log('antes')
-//     console.log(plaintext.data)
-//     console.log('dsps')
-//     return plaintext.data;
-//   });
-//
-// }
-//
-// console.log(Decrypt(encrypted,privkey))
+exports.generate = function(){
+	console.log('entre')
+	var options = {
+	    userIds: [{ name:'Jon papa', email:'jonpapa@example.com' }], // multiple user IDs
+	    numBits: 1024,                                            // RSA key size
+	    passphrase: 'jon'         // protects the private key
+	};
+
+	openpgp.generateKey(options).then(function(key) {
+	    var privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
+	    var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
+	    console.log('yei')
+	    console.log(privkey)
+	    console.log(pubkey)
+	});
+
+}
