@@ -110,7 +110,7 @@ exports.Decrypt = function(msg, privateKey){
 	});
 
 	console.log('antes')
-	generate()
+	// generate()
 }
 
 exports.generate = function(){
@@ -133,18 +133,40 @@ exports.generate = function(){
 
 
 // Sign function  ..........................................//
-
-
+options= {
+  data: "hola",
+  privateKeys: openpgp.key.readArmored(privkey2).keys[0],
+  armor: true
+};
+// console.log(privkey2)
+// console.log(options.privateKeys)
+// console.log(typeof(options.privateKeys))
+// var testKey = openpgp.key.readArmored(privkey2).keys[0]
+// console.log(openpgp.decryptKey(testKey,"jon"))
+openpgp.sign(options).then(function(signed){
+  console.log("signing in main")
+  console.log(signed.data)
+  return signed.data
+});
 
 exports.Sign = function(msg, privateKey){
   console.log("signing")
 
   options ={
     data: "hola",
-    privateKeys: openpgp.key.readArmored(privkey2).keys[0],
+    privateKeys: openpgp.key.readArmored(privkey2).keys,
     armor: true
   };
 
+// var unlockOptions={
+//   privateKeys: options.privateKeys,
+//   passphrase: 'jon'
+// }
+// openpgp.decryptKey(unlockOptions).then(function(unlockedKey){
+//   console.log("unlocking key")
+//   console.log(unlockedKey.data)
+//   return unlockedKey.data
+// })
   openpgp.sign(options).then(function(signedMessage){
     console.log('before signing')
     console.log(signedMessage.data)
