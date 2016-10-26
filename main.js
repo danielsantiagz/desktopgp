@@ -104,14 +104,14 @@ exports.Decrypt = function(msg, privateKey){
 // =5nWn\
 // -----END PGP MESSAGE-----"
 
-var encrypted = "-----BEGIN PGP MESSAGE----- \
-Version: OpenPGP.js v2.3.3 \
-Comment: http://openpgpjs.org \
-\
-1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV \
-AVjiN3rZbRTKSqLkdhA= \
-=o3fo \
------END PGP MESSAGE-----"
+var encrypted = ['-----BEGIN PGP MESSAGE-----',
+'Version: OpenPGP.js v2.3.3',
+'Comment: http://openpgpjs.org',
+'',
+'1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV',
+'AVjiN3rZbRTKSqLkdhA=',
+'=o3fo',
+'-----END PGP MESSAGE-----'].join('\n');
 
 	options = {
 	    message: openpgp.message.readArmored(encrypted),     // parse armored message
