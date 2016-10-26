@@ -83,26 +83,36 @@ exports.Decrypt = function(msg, privateKey){
 // 1Q==
 // =5nWn
 // -----END PGP MESSAGE-----`
-var encrypted = "-----BEGIN PGP MESSAGE-----\
-Version: OpenPGP.js v2.3.3\
-Comment: http://openpgpjs.org\
+// var encrypted = "-----BEGIN PGP MESSAGE-----\
+// Version: OpenPGP.js v2.3.3\
+// Comment: http://openpgpjs.org\
+// \
+// wcFMA/gCEr0q9qCKAQ/8DdNc6W3f/IC/u3qeHhXRo2h+XZ7C0Z+Lg6HDrMoz\
+// EpW2979KUINZNs8ewq3ITDHuS1Z+gOjp/hY5Td9ya9di308CrW4x1CsimGA4\
+// gClLW9Xj2GqSfYbIFCJY0koQ8ma7YhK6fjuu/K5HGZhoJ3RQfk6l6HSQfKMo\
+// lYomsqsDnAakMai6LFYnnxUXqUPWDbraqz0EyhUoZ9NE8kjWx4XMJd5FDszS\
+// oJP4zpcPS15HQ3ovsQDW97rQ4yJgp6ba8LAaUKI734Sf2RBi6tYCkTG9yuDK\
+// HfBS6c08KHj7HAg54jbdgMO3ISCr3xKwkeOpnyOOoUCzhl5lnt28ARM1clcU\
+// s8S1aTxcoVx1hd8E3L04uHkB4vs+p2nuC0sLJ3T5R8KHLEHjgOIji0uInzfm\
+// rTpzwJkHvVS7R3GVHz1ypZ9XVgJcgP06yfJmhncvLIgcL4dCCEngbmD1ARFJ\
+// JwupyAZW5fGoc3n8UC1BYgjAmgofSubvIPyzpySd2iTIlArMF9G7xduuoaX0\
+// lqxwJhbWWYgriFSjLGD8Yc/6KsTX4KI3OiMc1gLnuFk61K6b2Brs0f4fFPol\
+// piYCpbIgd/49bl/tWPOBZVGt2xITPCKbUUITtHm3+icnILFdrp6enNDtzSEK\
+// GkVO0TATo/wids9h6uNo1J/zWiEYNc6K3yc1LVu8sJzUOQHl6cTRq30m/vml\
+// O2h4cCJNRiyh/92Ed4vafYJwotErZyirExzh279CEGoI9IeLII5Jx5GZY8Nl\
+// 1Q==\
+// =5nWn\
+// -----END PGP MESSAGE-----"
+
+var encrypted = "-----BEGIN PGP MESSAGE----- \
+Version: OpenPGP.js v2.3.3 \
+Comment: http://openpgpjs.org \
 \
-wcFMA/gCEr0q9qCKAQ/8DdNc6W3f/IC/u3qeHhXRo2h+XZ7C0Z+Lg6HDrMoz\
-EpW2979KUINZNs8ewq3ITDHuS1Z+gOjp/hY5Td9ya9di308CrW4x1CsimGA4\
-gClLW9Xj2GqSfYbIFCJY0koQ8ma7YhK6fjuu/K5HGZhoJ3RQfk6l6HSQfKMo\
-lYomsqsDnAakMai6LFYnnxUXqUPWDbraqz0EyhUoZ9NE8kjWx4XMJd5FDszS\
-oJP4zpcPS15HQ3ovsQDW97rQ4yJgp6ba8LAaUKI734Sf2RBi6tYCkTG9yuDK\
-HfBS6c08KHj7HAg54jbdgMO3ISCr3xKwkeOpnyOOoUCzhl5lnt28ARM1clcU\
-s8S1aTxcoVx1hd8E3L04uHkB4vs+p2nuC0sLJ3T5R8KHLEHjgOIji0uInzfm\
-rTpzwJkHvVS7R3GVHz1ypZ9XVgJcgP06yfJmhncvLIgcL4dCCEngbmD1ARFJ\
-JwupyAZW5fGoc3n8UC1BYgjAmgofSubvIPyzpySd2iTIlArMF9G7xduuoaX0\
-lqxwJhbWWYgriFSjLGD8Yc/6KsTX4KI3OiMc1gLnuFk61K6b2Brs0f4fFPol\
-piYCpbIgd/49bl/tWPOBZVGt2xITPCKbUUITtHm3+icnILFdrp6enNDtzSEK\
-GkVO0TATo/wids9h6uNo1J/zWiEYNc6K3yc1LVu8sJzUOQHl6cTRq30m/vml\
-O2h4cCJNRiyh/92Ed4vafYJwotErZyirExzh279CEGoI9IeLII5Jx5GZY8Nl\
-1Q==\
-=5nWn\
+1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV \
+AVjiN3rZbRTKSqLkdhA= \
+=o3fo \
 -----END PGP MESSAGE-----"
+
 	options = {
 	    message: openpgp.message.readArmored(encrypted),     // parse armored message
 	    // publicKeys: openpgp.key.readArmored(pubkey).keys,    // for verification (optional)
