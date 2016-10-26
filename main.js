@@ -8,7 +8,7 @@ var key = require('./keys2.js');
 var enc = ''
 var pubkey = key.pub
 var privkey = key.priv
-console.log(pubkey)
+// console.log(pubkey)
 var msg = "hola"
 
 openpgp.initWorker({ path:'openpgp.worker.js' }) // set the relative web worker path
@@ -44,20 +44,48 @@ exports.openWindow = () => {
 exports.encrypt = function(msg, publicKey){
 	console.log('hola')
 
+	// var options, encrypted;
+	// // var privkey = '-----BEGIN PGP PRIVATE KEY BLOCK ... END PGP PRIVATE KEY BLOCK-----';
+
+	// options = {
+	//     data: 'Hello, World!',                             // input as String (or Uint8Array)
+	//     publicKeys: openpgp.key.readArmored(pubkey).keys,  // for encryption
+	//     // privateKeys: openpgp.key.readArmored(privkey).keys // for signing (optional)
+	// };
+
+	// openpgp.encrypt(options).then(function(ciphertext) {
+	//     encrypted = ciphertext.data; // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
+	// 	console.log('encrypted')
+	// 	console.log(encrypted);
+	// });
+
+
 	var options, encrypted;
-	// var privkey = '-----BEGIN PGP PRIVATE KEY BLOCK ... END PGP PRIVATE KEY BLOCK-----';
 
 	options = {
-	    data: 'Hello, World!',                             // input as String (or Uint8Array)
-	    publicKeys: openpgp.key.readArmored(pubkey).keys,  // for encryption
-	    // privateKeys: openpgp.key.readArmored(privkey).keys // for signing (optional)
+	    data: 'Hola Mundo', // input as Uint8Array (or String)
+	    publicKeys: openpgp.key.readArmored(pubkey).keys
+	    // passwords: ['secret stuff']              // multiple passwords possible
+	    // armor: false                              // don't ASCII armor (for Uint8Array output)
 	};
 
 	openpgp.encrypt(options).then(function(ciphertext) {
-	    encrypted = ciphertext.data; // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
-		enc = encrypted
-		console.log(encrypted);
+	    encrypted = ciphertext.data; // get raw encrypted packets as Uint8Array
+	    console.log(encrypted)
+	    options = {
+	        message: openpgp.message.readArmored(encrypted), // parse encrypted bytes
+	        privateKey: openpgp.key.readArmored(privkey).keys[0],
+	        password: 'secret stuff'                 // decrypt with password
+	        // format: 'binary'                          // output as Uint8Array
+	    };
+
+	    openpgp.decrypt(options).then(function(plaintext) {
+	        console.log (plaintext.data);
+	        return plaintext.data // Uint8Array([0x01, 0x01, 0x01])
+	    });
+
 	});
+
 }
 
 exports.Decrypt = function(msg, privateKey){
@@ -104,19 +132,42 @@ exports.Decrypt = function(msg, privateKey){
 // =5nWn\
 // -----END PGP MESSAGE-----"
 
+// var encrypted = ['-----BEGIN PGP MESSAGE-----',
+// 'Version: OpenPGP.js v2.3.3',
+// 'Comment: http://openpgpjs.org',
+// '',
+// '1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV',
+// 'AVjiN3rZbRTKSqLkdhA=',
+// '=o3fo',
+// '-----END PGP MESSAGE-----'].join('\n');
+
 var encrypted = ['-----BEGIN PGP MESSAGE-----',
 'Version: OpenPGP.js v2.3.3',
 'Comment: http://openpgpjs.org',
 '',
-'1DkB2jlHOVevnZ99RYRnkN8M+yNgFgh+QsMqeIUoA/sPpziqgpkCZ7LclWkV',
-'AVjiN3rZbRTKSqLkdhA=',
-'=o3fo',
+'wcFMA/gCEr0q9qCKAQ/8CH+t1KeRgHC0sK+lVfUgO2Z+EQRNN2fG2nB9cZiG',
+'qcoeOGeKiURXwWFW72b/55CF7WSVe44T/5v/FzdDNv6mUYc+F9UfBmp/HY62',
+'/N3m0Bahh19e2UpXPWt51Ys3OE0qCGmMBlVX1plCgh/bMsfsOLpgCvsHEnOu',
+'QLg59Gr6mhF+ullVwrbwahj8vvbMhndp0xBhSVPfo+h/dCpJbdA359OsiAsO',
+'rR/YP4aJdcy2Pu5D0Jp6rRYd1P81iZ60CEQsijrouQFeQcX1PnKUkWh/XWE7',
+'cvSxYnu1+3mNPiESXTNsMqNxiDOeqc2vK4ek8KLB8KPPMQ9LhsQycFKKaLJM',
+'Jj3oyadF9FxJPofoxDW0EJ2rUzViW0J/ZwPJGQn+nQbirra0fywIFUL+SPc+',
+'BB3ZDDd6vmf+QrJGiyFkMeuCckDv0ogEbdZQH5SNBs+52g3Wj1o9/3kmVbF6',
+'XMrMRHbmRdCaSewxOzHig2pUhtqNM7S1J8WxmrIc+rIEU1oKGOok3NOte5Py',
+'0cVT+zfa0/F1nHYlqUmNfyrYDdbUmm7GVr+QrqLftxc10YtjDIMLkZakCWeM',
+'r4RmiMAINByirOjQIS/q7RSuOkqlCl+o4W5L47BuZbLDpLo9LC1H03DqLFcQ',
+'71It0ru3IstDu7Lz0liAyuDjvpnLoRig7cE/zvH1wOTDLgQJAwggpN6siFtR',
+'7GCTQhMZyP+nIGeU9OzeUftJO4oYLU4OXDBqscNcb/uYrenUNgGEeIw8trq4',
+'6op1ngDQ29BVY/NeHEuGOM6msxUFwSTP9TSi37Nh674xTh4a4q+ayt+E33bK',
+'Hg==',
+'=xGsm',
 '-----END PGP MESSAGE-----'].join('\n');
 
 	options = {
 	    message: openpgp.message.readArmored(encrypted),     // parse armored message
 	    // publicKeys: openpgp.key.readArmored(pubkey).keys,    // for verification (optional)
-	    privateKey: openpgp.key.readArmored(privkey).keys[0] // for decryption
+	    privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
+	    password: 'secret stuff'
 	};
 
 	console.log('de')
