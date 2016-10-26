@@ -1,3 +1,7 @@
 node_modules/
+<<<<<<< HEAD
 package.json
 npm-debug.log.3247645513
+=======
+package.json
+>>>>>>> 65021cbba8cab9857f6a7dfc03351d91c9003085

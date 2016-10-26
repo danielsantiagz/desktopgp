@@ -11,3 +11,12 @@ const main = remote.require('./main.js')
 function signFunc(){
 	main.openWindow()
 }
+
+
+function encryptFunc(){
+	main.encrypt('msg', 'publicKey')
+}
+
+function decryptFunc(){
+	main.Decrypt('msg', 'privateKey')
+}
