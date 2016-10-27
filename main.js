@@ -157,6 +157,10 @@ exports.Sign = function(msg, privateKey){
     privateKeys: openpgp.key.readArmored(privkey2).keys,
     armor: true
   };
+  console.log(options.privateKeys)
+  var check = options.isValidSigningKey(options.privateKeys)
+  console.log('check')
+  console.log(check)
 
 // var unlockOptions={
 //   privateKeys: options.privateKeys,
@@ -173,7 +177,7 @@ exports.Sign = function(msg, privateKey){
     console.log('after signing')
     return signedMessage.data
   });
-  console.log
+
 
 }
 
