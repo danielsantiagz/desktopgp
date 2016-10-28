@@ -157,11 +157,15 @@ exports.Sign = function(msg, privateKey){
     privateKeys: openpgp.key.readArmored(privkey2).keys,
     armor: true
   };
+  console.log(options.privateKeys[0].decrypt('jon'))
+  console.log("/////////////after the test/////////////")
   console.log(options.privateKeys)
-  var check = options.isValidSigningKey(options.privateKeys)
-  console.log('check')
-  console.log(check)
+  // console.log(options.privateKeys)
+  // var check = options.isValidSigningKey(options.privateKeys)
+  // console.log('check')
+  // console.log(check)
 
+//||||||||||||||||TESTING HOW THE KEY SHOULD BE DECRYPTED
 // var unlockOptions={
 //   privateKeys: options.privateKeys,
 //   passphrase: 'jon'
@@ -171,6 +175,9 @@ exports.Sign = function(msg, privateKey){
 //   console.log(unlockedKey.data)
 //   return unlockedKey.data
 // })
+
+
+//|||||||||||||||ACTUALLY DOING THE SIGNING OF THE MESSAGE
   openpgp.sign(options).then(function(signedMessage){
     console.log('before signing')
     console.log(signedMessage.data)
