@@ -24,3 +24,8 @@ function decryptFunc(){
 function signFunc(){
 	main.Sign('msg', 'privateKey')
 }
+
+function verifyFunc() {
+	main.Verify('msg', 'publicKey')
+
+}

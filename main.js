@@ -158,6 +158,7 @@ exports.Sign = function(msg, privateKey){
     data: "hola", // message to be signed
     privateKeys: openpgp.key.readArmored(privkey2).keys, //read the key from armor
     armor: true // true if you want ascii armored, false for message object
+    // armor: false
   };
   console.log(options.privateKeys[0].decrypt('jon')) //aparently the way to decrypt private keys
 
@@ -170,6 +171,27 @@ exports.Sign = function(msg, privateKey){
     console.log('before signing') // random debug comment
     console.log(signedMessage.data) // random debug comment (to se the actuall result of the function)
     console.log('after signing')//random debug comment
+    // msg = signedMessage.data // using this value for the Verify function
     return signedMessage.data
   });
+}
+
+
+//|||||||||||||Verify function
+
+
+exports.Verify= function (msg, publicKey){
+  console.log("verifying")
+  options = {
+    publicKeys: openpgp.key.readArmored(pubkey2).keys,
+    message: msg
+  }
+  console.log(options.publicKeys)
+  console.log(options.msg)
+  openpgp.verify(options).then(function(verified){
+    console.log("before")
+    console.log(verified.data)
+    console.log("after")
+    return verified.data
+  })
 }
