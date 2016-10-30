@@ -42,7 +42,10 @@ exports.openWindow = () => {
   let win = new BrowserWindow({width:400, height:200})
   win.loadURL(`file://${__dirname}/bear.html`)
 }
-
+exports.openVerifyWindow = () => {
+  let win = new BrowserWindow({width:800, height:600})
+  win.loadURL(`file://${__dirname}/verifyMsg.html`)
+}
 exports.encrypt = function(msg, publicKey){
 	console.log('hola')
 
