@@ -137,52 +137,52 @@ exports.generate = function(){
 
 }
 
+//||||||||||||||||||||PRELIMINAR TESTING OF THE SIGNING FUNCTION (not working)
+// // Sign function  ..........................................//
+// options= {
+//   data: "hola",
+//   privateKeys: openpgp.key.readArmored(privkey2).keys[0],
+//   armor: true
+// };
+// // console.log(privkey2)
+// // console.log(options.privateKeys)
+// // console.log(typeof(options.privateKeys))
+// // var testKey = openpgp.key.readArmored(privkey2).keys[0]
+// // console.log(openpgp.decryptKey(testKey,"jon"))
+// openpgp.sign(options).then(function(signed){
+//   console.log("signing in main")
+//   console.log(signed.data)
+//   return signed.data
+// });
 
-// Sign function  ..........................................//
-options= {
-  data: "hola",
-  privateKeys: openpgp.key.readArmored(privkey2).keys[0],
-  armor: true
-};
-// console.log(privkey2)
-// console.log(options.privateKeys)
-// console.log(typeof(options.privateKeys))
-// var testKey = openpgp.key.readArmored(privkey2).keys[0]
-// console.log(openpgp.decryptKey(testKey,"jon"))
-openpgp.sign(options).then(function(signed){
-  console.log("signing in main")
-  console.log(signed.data)
-  return signed.data
-});
-
+//This is the function that takes care of signing
+//messages using the privatekey
 exports.Sign = function(msg, privateKey){
   console.log("signing")
 
-  options ={
-    data: "hola",
-    privateKeys: openpgp.key.readArmored(privkey2).keys,
-    armor: true
+  options ={//variable containing the options for the signing function
+    data: "hola", // message to be signed
+    privateKeys: openpgp.key.readArmored(privkey2).keys, //read the key from armor
+    armor: true // true if you want ascii armored, false for message object
+    // armor: false
   };
+  console.log(options.privateKeys[0].decrypt('jon')) //aparently the way to decrypt private keys
 
-// var unlockOptions={
-//   privateKeys: options.privateKeys,
-//   passphrase: 'jon'
-// }
-// openpgp.decryptKey(unlockOptions).then(function(unlockedKey){
-//   console.log("unlocking key")
-//   console.log(unlockedKey.data)
-//   return unlockedKey.data
-// })
-  openpgp.sign(options).then(function(signedMessage){
-    console.log('before signing')
-    console.log(signedMessage.data)
-    console.log('after signing')
+  //random debugging messages
+  console.log("/////////////after the test/////////////")
+  console.log(options.privateKeys)
+
+//|||||||||||||||ACTUALLY DOING THE SIGNING OF THE MESSAGE
+  openpgp.sign(options).then(function(signedMessage){//where the magic happens
+    console.log('before signing') // random debug comment
+    console.log(signedMessage.data) // random debug comment (to se the actuall result of the function)
+    console.log('after signing')//random debug comment
+    // msg = signedMessage.data // using this value for the Verify function
     return signedMessage.data
   });
-  console.log
-
 }
 
+<<<<<<< HEAD
 // console.log(openpgp.message.readArmored(sigmsg))
 // function sign_message()
 //   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
@@ -225,3 +225,35 @@ exports.importPublicKeys = function(publicKey){
 		// console.log(k.primaryKey.getKeyId().toHex())
 	// })
 }
+=======
+
+//|||||||||||||Verify function
+// var message = openpgp.message.readArmored(key.sigmsg)
+
+exports.Verify= function (msg, publicKey){
+  console.log("verifying")
+  options = {
+    publicKeys: openpgp.key.readArmored(pubkey2).keys,
+    message: openpgp.cleartext.readArmored(key.sigmsg)
+    // message: openpgp.createMessage(openpgp.message.readArmored(key.sigmsg))
+    // message: key.sigmsg
+  }
+  // console.log(options.publicKeys)
+  // console.log(key.sigmsg)
+  console.log(options.message)
+  openpgp.verify(options).then(function(verified){
+    // console.log("before")//debuggin message
+    // console.log(verified.data)//debuggin message
+    console.log(verified)//basically a dictionary containing the message, keyid and valid (boolean)
+    console.log(verified.signatures[0].valid)//acces the boolean that tells you if its a valid signature
+    console.log(verified.signatures[0].keyid)//acces the keyid for the key used to sign the message
+    // console.log('data:')//debuggin message
+    // console.log(verified.data)//debuggin message
+    // console.log('signatures: ')//debuggin message
+    // console.log(verified.signatures.valid)//debuggin message
+    // console.log(verified.signatures.keyid)//debuggin message
+    console.log("after")
+    return verified.data
+  })
+}
+>>>>>>> 3c4086386c5fb346ed20d8229d07ed60a9690a11

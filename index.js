@@ -25,6 +25,7 @@ function signFunc(){
 	main.Sign('msg', 'privateKey')
 }
 
+
 function getPublicKeys(){
 	keys = main.getPublicKeys()
 	keys.forEach(function(key){
@@ -39,4 +40,9 @@ function newWindow(name){
 function importPublicKeys(){
 	key = document.getElementById("key").value;
 	main.importPublicKeys(key)
+}
+
+function verifyFunc() {
+	main.Verify('msg', 'publicKey')
+
 }

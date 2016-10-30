@@ -254,8 +254,26 @@ var pub2 = ['-----BEGIN PGP PUBLIC KEY BLOCK-----',
 '=Onu2',
 '-----END PGP PUBLIC KEY BLOCK-----'].join('\n');
 
+
+
+var signed = ['-----BEGIN PGP SIGNED MESSAGE-----',
+'Hash: SHA256',
+'',
+'hola',
+'-----BEGIN PGP SIGNATURE-----',
+'Version: OpenPGP.js v2.3.4',
+'Comment: http://openpgpjs.org',
+'',
+'wpwEAQEIABAFAlgVNE0JED1uLrMDVCMYAACkYAP9Fd58+9yfS2CA1vLL8nxi',
+'GOM6cpLXVtokqorq8MBeF3brEsO0Mv+HaCWnm/Z7PuFZTqIdKH6l7YWZ+6Yy',
+'W/oP5u5t1nHk8CYU9ve/LPSzcQiXXeEss2gDYbaU8Zp86SiN2n+fJLerrtNw',
+'4OTWTGF/WQFUVRgBC82xZUVjFrDQYMw=',
+'=kK9a',
+'-----END PGP SIGNATURE-----'].join('\n');
+
 exports.pub = pubkey;
 exports.priv = privkey;
 exports.pub2 = pub2;
 exports.priv2 = priv2;
 exports.enc = encrypted;
+exports.sigmsg = signed ; 
