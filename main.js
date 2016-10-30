@@ -41,9 +41,10 @@ app.on('ready', () => {
   win.webContents.openDevTools()
 })
 
-exports.openWindow = () => {
-  let win = new BrowserWindow({width:400, height:200})
-  win.loadURL(`file://${__dirname}/bear.html`)
+exports.openWindow = function(name){
+	let win = new BrowserWindow({width:400, height:200})
+	win.loadURL(`file://${__dirname}/`+name)
+	win.webContents.openDevTools()
 }
 exports.openVerifyWindow = () => {
   let win = new BrowserWindow({width:800, height:600})
@@ -195,7 +196,7 @@ exports.getPublicKeys = function(){
 	// console.log(key.primaryKey.getFingerprint());
 	// console.log(key.primaryKey.created);
 	// console.log(key.primaryKey.getKeyId().toHex())
-    
+
 
     var publicKeys = keyring.publicKeys.keys
 
