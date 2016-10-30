@@ -4,6 +4,9 @@ const {app, BrowserWindow} = electron
 const openpgp = require('openpgp')
 
 // openpgp
+
+var keyring = new openpgp.Keyring()
+
 var key = require('./keys2.js');
 var enc = ''
 var pubkey = key.pub
@@ -66,8 +69,8 @@ exports.encrypt = function(msg, publicKey){
 
 	options = {
 	    data: 'Hola Mundo', // input as Uint8Array (or String)
-	    publicKeys: openpgp.key.readArmored(pubkey).keys
-	    // passwords: ['secret stuff']              // multiple passwords possible
+	    publicKeys: openpgp.key.readArmored(pubkey).keys,
+	    passwords: ['secret stuff']              // multiple passwords possible
 	    // armor: false                              // don't ASCII armor (for Uint8Array output)
 	};
 
@@ -92,24 +95,27 @@ exports.encrypt = function(msg, publicKey){
 
 exports.Decrypt = function(msg, privateKey){
 	console.log('decrypt')
-	var encrypted = key.enc
+	// console.log(Object.getOwnPropertyNames(privkey2));
+	console.log(openpgp.key.readArmored(privkey2).keys[0].decryptKey('jon'))
+	console.log(openpgp.key.readArmored(privkey2).keys[0])
+	// var encrypted = key.enc
 
-	options = {
-	    message: openpgp.message.readArmored(encrypted),     // parse armored message
-	    privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
-	    password: 'secret stuff'
-	};
+	// options = {
+	//     message: openpgp.message.readArmored(encrypted),     // parse armored message
+	//     privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
+	//     password: 'secret stuff'
+	// };
 
-	console.log('de')
+	// console.log('de')
 
-	openpgp.decrypt(options).then(function(plaintext) {
-	    console.log('antes')
-	    console.log(plaintext.data)
-	    console.log('dsps')
-	    return plaintext.data; // 'Hello, World!'
-	});
+	// openpgp.decrypt(options).then(function(plaintext) {
+	//     console.log('antes')
+	//     console.log(plaintext.data)
+	//     console.log('dsps')
+	//     return plaintext.data; // 'Hello, World!'
+	// });
 
-	console.log('antes')
+	// console.log('antes')
 	// generate()
 }
 
@@ -181,3 +187,41 @@ exports.Sign = function(msg, privateKey){
 // function sign_message()
 //   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
 //   console.log(sigmsg)
+
+exports.getPublicKeys = function(){
+	// key = openpgp.key.readArmored(pubkey).keys[0]
+	// console.log(key.primaryKey.getFingerprint());
+	// console.log(key.primaryKey.created);
+	// console.log(key.primaryKey.getKeyId().toHex())
+    
+
+    var publicKeys = keyring.publicKeys.keys
+
+	 // var localstore = null;
+	 // var pgpKeyring = new openpgp.Keyring(localstore);
+	 // // console.log(key.getUserIds()[0])
+	 // // console.log(pgpKeyring.publicKeys)
+	 // pgpKeyring.publicKeys.importKey(pubkey)
+	 // console.log('dsps')
+	 // console.log(pgpKeyring.getAllKeys())
+	 // pgpKeyring.store()
+	return publicKeys
+}
+
+exports.openWindow = function(name){
+	let win = new BrowserWindow({width:400, height:200})
+	win.loadURL(`file://${__dirname}/`+name)
+	win.webContents.openDevTools()
+}
+
+exports.importPublicKeys = function(publicKey){
+	keyring.publicKeys.importKey(publicKey)
+	keyring.store()
+
+
+	// Esto te imprime todos los id de los public key que están guardados
+
+	// keyring.publicKeys.keys.forEach(function(k){
+		// console.log(k.primaryKey.getKeyId().toHex())
+	// })
+}
