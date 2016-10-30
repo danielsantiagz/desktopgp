@@ -182,7 +182,6 @@ exports.Sign = function(msg, privateKey){
   });
 }
 
-<<<<<<< HEAD
 // console.log(openpgp.message.readArmored(sigmsg))
 // function sign_message()
 //   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
@@ -224,8 +223,6 @@ exports.importPublicKeys = function(publicKey){
 	// keyring.publicKeys.keys.forEach(function(k){
 		// console.log(k.primaryKey.getKeyId().toHex())
 	// })
-}
-=======
 
 //|||||||||||||Verify function
 // var message = openpgp.message.readArmored(key.sigmsg)
@@ -256,4 +253,3 @@ exports.Verify= function (msg, publicKey){
     return verified.data
   })
 }
->>>>>>> 3c4086386c5fb346ed20d8229d07ed60a9690a11
