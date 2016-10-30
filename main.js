@@ -184,10 +184,11 @@ exports.Verify= function (msg, publicKey){
   console.log("verifying")
   options = {
     publicKeys: openpgp.key.readArmored(pubkey2).keys,
-    message: msg
+    message: openpgp.message.readArmored(key.sigmsg)
   }
   console.log(options.publicKeys)
-  console.log(options.msg)
+  console.log(key.sigmsg)
+  console.log(options.message)
   openpgp.verify(options).then(function(verified){
     console.log("before")
     console.log(verified.data)
