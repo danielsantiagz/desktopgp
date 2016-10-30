@@ -178,20 +178,23 @@ exports.Sign = function(msg, privateKey){
 
 
 //|||||||||||||Verify function
-
+// var message = openpgp.message.readArmored(key.sigmsg)
 
 exports.Verify= function (msg, publicKey){
   console.log("verifying")
   options = {
     publicKeys: openpgp.key.readArmored(pubkey2).keys,
-    message: openpgp.message.readArmored(key.sigmsg)
+    message: openpgp.cleartext.readArmored(key.sigmsg)
+    // message: openpgp.createMessage(openpgp.message.readArmored(key.sigmsg))
+    // message: key.sigmsg
   }
-  console.log(options.publicKeys)
-  console.log(key.sigmsg)
+  // console.log(options.publicKeys)
+  // console.log(key.sigmsg)
   console.log(options.message)
   openpgp.verify(options).then(function(verified){
     console.log("before")
     console.log(verified.data)
+    console.log(verified)
     console.log("after")
     return verified.data
   })
