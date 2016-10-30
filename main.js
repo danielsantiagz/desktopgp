@@ -192,9 +192,16 @@ exports.Verify= function (msg, publicKey){
   // console.log(key.sigmsg)
   console.log(options.message)
   openpgp.verify(options).then(function(verified){
-    console.log("before")
-    console.log(verified.data)
-    console.log(verified)
+    // console.log("before")//debuggin message
+    // console.log(verified.data)//debuggin message
+    console.log(verified)//basically a dictionary containing the message, keyid and valid (boolean)
+    console.log(verified.signatures[0].valid)//acces the boolean that tells you if its a valid signature
+    console.log(verified.signatures[0].keyid)//acces the keyid for the key used to sign the message
+    // console.log('data:')//debuggin message
+    // console.log(verified.data)//debuggin message
+    // console.log('signatures: ')//debuggin message
+    // console.log(verified.signatures.valid)//debuggin message
+    // console.log(verified.signatures.keyid)//debuggin message
     console.log("after")
     return verified.data
   })
