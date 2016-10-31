@@ -34,3 +34,19 @@ function verifyFunc() {
 function KeyManageFunc(){
 	main.openWindow()
 }
+
+function getPublicKeys(){
+	keys = main.getPublicKeys()
+	keys.forEach(function(key){
+		console.log(key.primaryKey.getKeyId().toHex())
+	})
+}
+
+function newWindow(name){
+	main.openWindow(name)
+}
+
+function importPublicKeys(){
+	key = document.getElementById("key").value;
+	main.importPublicKeys(key)
+}

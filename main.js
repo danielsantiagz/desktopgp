@@ -4,6 +4,9 @@ const {app, BrowserWindow} = electron
 const openpgp = require('openpgp')
 
 // openpgp
+
+var keyring = new openpgp.Keyring()
+
 var key = require('./keys2.js');
 var enc = ''
 var pubkey = key.pub
@@ -179,6 +182,49 @@ exports.Sign = function(msg, privateKey){
   });
 }
 
+
+// console.log(openpgp.message.readArmored(sigmsg))
+// function sign_message()
+//   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
+//   console.log(sigmsg)
+
+exports.getPublicKeys = function(){
+	// key = openpgp.key.readArmored(pubkey).keys[0]
+	// console.log(key.primaryKey.getFingerprint());
+	// console.log(key.primaryKey.created);
+	// console.log(key.primaryKey.getKeyId().toHex())
+    
+
+    var publicKeys = keyring.publicKeys.keys
+
+	 // var localstore = null;
+	 // var pgpKeyring = new openpgp.Keyring(localstore);
+	 // // console.log(key.getUserIds()[0])
+	 // // console.log(pgpKeyring.publicKeys)
+	 // pgpKeyring.publicKeys.importKey(pubkey)
+	 // console.log('dsps')
+	 // console.log(pgpKeyring.getAllKeys())
+	 // pgpKeyring.store()
+	return publicKeys
+}
+
+exports.openWindow = function(name){
+	let win = new BrowserWindow({width:400, height:200})
+	win.loadURL(`file://${__dirname}/`+name)
+	win.webContents.openDevTools()
+}
+
+exports.importPublicKeys = function(publicKey){
+	keyring.publicKeys.importKey(publicKey)
+	keyring.store()
+
+
+	// Esto te imprime todos los id de los public key que están guardados
+
+	// keyring.publicKeys.keys.forEach(function(k){
+		// console.log(k.primaryKey.getKeyId().toHex())
+	// })
+}
 
 //|||||||||||||Verify function
 // var message = openpgp.message.readArmored(key.sigmsg)
