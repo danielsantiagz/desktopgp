@@ -193,7 +193,7 @@ exports.getPublicKeys = function(){
 	// console.log(key.primaryKey.getFingerprint());
 	// console.log(key.primaryKey.created);
 	// console.log(key.primaryKey.getKeyId().toHex())
-    
+
 
     var publicKeys = keyring.publicKeys.keys
 
@@ -232,6 +232,7 @@ exports.importPublicKeys = function(publicKey){
 // console.log(key.sigmsg)
 exports.Verify= function (msg, publicKey){
   console.log("verifying")
+  // console.log(openpgp.key.readArmored(publicKey).keys)
 
   options = {
     publicKeys: openpgp.key.readArmored(publicKey).keys,
@@ -242,7 +243,7 @@ exports.Verify= function (msg, publicKey){
   // console.log(options.publicKeys)
   // console.log(key.sigmsg)
   // console.log(options.message)
-  openpgp.verify(options).then(function(verified){
+  var ver = openpgp.verify(options).then(function(verified){
     // console.log("before")//debuggin message
     // console.log(verified.data)//debuggin message
     console.log(verified)//basically a dictionary containing the message, keyid and valid (boolean)
@@ -256,4 +257,5 @@ exports.Verify= function (msg, publicKey){
     console.log("after")
     return verified
   })
+  return ver ;
 }
