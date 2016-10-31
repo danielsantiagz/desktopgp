@@ -8,9 +8,9 @@ const main = remote.require('./main.js')
 // button.textContent = 'Open Window'
 // document.body.appendChild(button)
 
-function signFunc(){
-	main.openWindow()
-}
+// function signFunc(){
+// 	main.openWindow()
+// }
 
 
 function encryptFunc(){
@@ -25,6 +25,15 @@ function signFunc(){
 	main.Sign('msg', 'privateKey')
 }
 
+function verifyFunc() {
+	// main.Verify('msg', 'publicKey')
+	main.openVerifyWindow() 
+
+}
+
+function KeyManageFunc(){
+	main.openWindow()
+}
 
 function getPublicKeys(){
 	keys = main.getPublicKeys()
@@ -40,9 +49,4 @@ function newWindow(name){
 function importPublicKeys(){
 	key = document.getElementById("key").value;
 	main.importPublicKeys(key)
-}
-
-function verifyFunc() {
-	main.Verify('msg', 'publicKey')
-
 }

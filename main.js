@@ -45,7 +45,10 @@ exports.openWindow = () => {
   let win = new BrowserWindow({width:400, height:200})
   win.loadURL(`file://${__dirname}/bear.html`)
 }
-
+exports.openVerifyWindow = () => {
+  let win = new BrowserWindow({width:800, height:600})
+  win.loadURL(`file://${__dirname}/verifyMsg.html`)
+}
 exports.encrypt = function(msg, publicKey){
 	console.log('hola')
 
@@ -69,8 +72,8 @@ exports.encrypt = function(msg, publicKey){
 
 	options = {
 	    data: 'Hola Mundo', // input as Uint8Array (or String)
-	    publicKeys: openpgp.key.readArmored(pubkey).keys,
-	    passwords: ['secret stuff']              // multiple passwords possible
+	    publicKeys: openpgp.key.readArmored(pubkey).keys
+	    // passwords: ['secret stuff']              // multiple passwords possible
 	    // armor: false                              // don't ASCII armor (for Uint8Array output)
 	};
 
@@ -95,27 +98,24 @@ exports.encrypt = function(msg, publicKey){
 
 exports.Decrypt = function(msg, privateKey){
 	console.log('decrypt')
-	// console.log(Object.getOwnPropertyNames(privkey2));
-	console.log(openpgp.key.readArmored(privkey2).keys[0].decryptKey('jon'))
-	console.log(openpgp.key.readArmored(privkey2).keys[0])
-	// var encrypted = key.enc
+	var encrypted = key.enc
 
-	// options = {
-	//     message: openpgp.message.readArmored(encrypted),     // parse armored message
-	//     privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
-	//     password: 'secret stuff'
-	// };
+	options = {
+	    message: openpgp.message.readArmored(encrypted),     // parse armored message
+	    privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
+	    password: 'secret stuff'
+	};
 
-	// console.log('de')
+	console.log('de')
 
-	// openpgp.decrypt(options).then(function(plaintext) {
-	//     console.log('antes')
-	//     console.log(plaintext.data)
-	//     console.log('dsps')
-	//     return plaintext.data; // 'Hello, World!'
-	// });
+	openpgp.decrypt(options).then(function(plaintext) {
+	    console.log('antes')
+	    console.log(plaintext.data)
+	    console.log('dsps')
+	    return plaintext.data; // 'Hello, World!'
+	});
 
-	// console.log('antes')
+	console.log('antes')
 	// generate()
 }
 
@@ -182,6 +182,7 @@ exports.Sign = function(msg, privateKey){
   });
 }
 
+
 // console.log(openpgp.message.readArmored(sigmsg))
 // function sign_message()
 //   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
@@ -224,6 +225,7 @@ exports.importPublicKeys = function(publicKey){
 		// console.log(k.primaryKey.getKeyId().toHex())
 	// })
 }
+
 //|||||||||||||Verify function
 // var message = openpgp.message.readArmored(key.sigmsg)
 
