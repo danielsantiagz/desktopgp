@@ -223,7 +223,7 @@ exports.importPublicKeys = function(publicKey){
 	// keyring.publicKeys.keys.forEach(function(k){
 		// console.log(k.primaryKey.getKeyId().toHex())
 	// })
-
+}
 //|||||||||||||Verify function
 // var message = openpgp.message.readArmored(key.sigmsg)
 
