@@ -36,17 +36,14 @@ function KeyManageFunc(){
 }
 
 function getPublicKeys(){
-	keys = main.getPublicKeys()
-	keys.forEach(function(key){
-		console.log(key.primaryKey.getKeyId().toHex())
-	})
+	main.openWindow('publicKeys.html', false)
 }
 
 function newWindow(name){
-	main.openWindow(name)
+	main.openWindow(name, true)
 }
 
-function importPublicKeys(){
+function importKey(){
 	key = document.getElementById("key").value;
-	main.importPublicKeys(key)
+	main.importKey(key)
 }

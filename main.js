@@ -205,24 +205,37 @@ exports.getPublicKeys = function(){
 	 // console.log('dsps')
 	 // console.log(pgpKeyring.getAllKeys())
 	 // pgpKeyring.store()
+	// var table = document.getElementById("publicKeysTable");
 	return publicKeys
 }
 
-exports.openWindow = function(name){
+exports.openWindow = function(name, devTools){
 	let win = new BrowserWindow({width:400, height:200})
 	win.loadURL(`file://${__dirname}/`+name)
-	win.webContents.openDevTools()
+	
+	if (devTools) {
+		win.webContents.openDevTools()
+	};
 }
 
-exports.importPublicKeys = function(publicKey){
-	keyring.publicKeys.importKey(publicKey)
+exports.importKey = function(key){
+	console.log('importKey');
+	armored = openpgp.key.readArmored(key).keys[0]
+	if (armored.isPublic()) {
+		keyring.publicKeys.importKey(key)
+	}
+	else if(armored.isPrivate()){
+		keyring.privateKeys.importKey(key)
+	}
+	// armored = openpgp.key.readArmored(key).keys[0]
+	// console.log(armored.isPublic())
+	// keyring.publicKeys.importKey(publicKey)
 	keyring.store()
-
 
 	// Esto te imprime todos los id de los public key que están guardados
 
 	// keyring.publicKeys.keys.forEach(function(k){
-		// console.log(k.primaryKey.getKeyId().toHex())
+	// 	console.log(k.primaryKey.getKeyId().toHex())
 	// })
 }
 
