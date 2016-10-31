@@ -182,18 +182,20 @@ exports.Sign = function(msg, privateKey){
 
 //|||||||||||||Verify function
 // var message = openpgp.message.readArmored(key.sigmsg)
-
+// console.log(openpgp.cleartext.readArmored(key.sigmsg).packets[0].issuerKeyId)
+// console.log(key.sigmsg)
 exports.Verify= function (msg, publicKey){
   console.log("verifying")
+
   options = {
-    publicKeys: openpgp.key.readArmored(pubkey2).keys,
-    message: openpgp.cleartext.readArmored(key.sigmsg)
-    // message: openpgp.createMessage(openpgp.message.readArmored(key.sigmsg))
-    // message: key.sigmsg
+    publicKeys: openpgp.key.readArmored(publicKey).keys,
+    message: openpgp.cleartext.readArmored(msg)
+    // publicKeys: openpgp.key.readArmored(pubkey2).keys,
+    // message: openpgp.cleartext.readArmored(key.sigmsg)
   }
   // console.log(options.publicKeys)
   // console.log(key.sigmsg)
-  console.log(options.message)
+  // console.log(options.message)
   openpgp.verify(options).then(function(verified){
     // console.log("before")//debuggin message
     // console.log(verified.data)//debuggin message
@@ -206,6 +208,6 @@ exports.Verify= function (msg, publicKey){
     // console.log(verified.signatures.valid)//debuggin message
     // console.log(verified.signatures.keyid)//debuggin message
     console.log("after")
-    return verified.data
+    return verified
   })
 }
