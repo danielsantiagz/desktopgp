@@ -5,6 +5,13 @@ var noti;
 var para = document.createElement('p');
 var options;
 
+function toHex(str) {
+	var hex = '';
+	for(var i=0;i<str.length;i++) {
+		hex += ''+str.charCodeAt(i).toString(16);
+	}
+	return hex;
+}
 
 function VerifyInputMsg(){
   console.log("test ")
@@ -23,6 +30,8 @@ function VerifyInputMsg(){
         message: "The message was signed correctly"
       }
       remote.dialog.showMessageBox(options)
+      console.log(typeof result.signatures[0].keyid.bytes);
+      console.log(toHex(result.signatures[0].keyid.bytes))
     }
     else {
       // options = {
