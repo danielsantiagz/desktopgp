@@ -84,8 +84,21 @@ exports.decrypt = function(msg, passphrase){
 		};
 
 		decryptedMsg = openpgp.decrypt(options).then(function(plaintext) {
-		    return plaintext.data; // 'Hello, World!'
+		    key.encrypt(passphrase);
+
+		    return {
+		    	decryptedMsg: plaintext.data,
+		    	error: null
+		    } // 'Hello, World!'
+
+		}, function (error) {
+    		return {
+    			decryptedMsg: msg,
+    			error: error
+    		}
 		});
+
+		
 	})
 
 	return decryptedMsg
