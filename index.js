@@ -40,7 +40,7 @@ function getPublicKeys(){
 }
 
 function newWindow(name){
-	main.openWindow(name, true)
+	main.openWindow(name, false)
 }
 
 function importKey(){

@@ -49,74 +49,46 @@ exports.openVerifyWindow = () => {
   let win = new BrowserWindow({width:800, height:600})
   win.loadURL(`file://${__dirname}/verifyMsg.html`)
 }
-exports.encrypt = function(msg, publicKey){
-	console.log('hola')
+exports.encrypt = function(msg, publicKeyId){
+	console.log('encrypt')
 
-	// var options, encrypted;
-	// // var privkey = '-----BEGIN PGP PRIVATE KEY BLOCK ... END PGP PRIVATE KEY BLOCK-----';
-
-	// options = {
-	//     data: 'Hello, World!',                             // input as String (or Uint8Array)
-	//     publicKeys: openpgp.key.readArmored(pubkey).keys,  // for encryption
-	//     // privateKeys: openpgp.key.readArmored(privkey).keys // for signing (optional)
-	// };
-
-	// openpgp.encrypt(options).then(function(ciphertext) {
-	//     encrypted = ciphertext.data; // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
-	// 	console.log('encrypted')
-	// 	console.log(encrypted);
-	// });
-
-
-	var options, encrypted;
+	var publicKey = keyring.publicKeys.getForId(publicKeyId)
+	var options, encryptedMsg;
 
 	options = {
-	    data: 'Hola Mundo', // input as Uint8Array (or String)
-	    publicKeys: openpgp.key.readArmored(pubkey).keys
+	    data: msg, // input as Uint8Array (or String)
+	    publicKeys: publicKey
 	    // passwords: ['secret stuff']              // multiple passwords possible
 	    // armor: false                              // don't ASCII armor (for Uint8Array output)
 	};
 
-	openpgp.encrypt(options).then(function(ciphertext) {
-	    encrypted = ciphertext.data; // get raw encrypted packets as Uint8Array
-	    console.log(encrypted)
-	    options = {
-	        message: openpgp.message.readArmored(encrypted), // parse encrypted bytes
-	        privateKey: openpgp.key.readArmored(privkey).keys[0],
-	        password: 'secret stuff'                 // decrypt with password
-	        // format: 'binary'                          // output as Uint8Array
-	    };
-
-	    openpgp.decrypt(options).then(function(plaintext) {
-	        console.log (plaintext.data);
-	        return plaintext.data // Uint8Array([0x01, 0x01, 0x01])
-	    });
-
+	encryptedMsg = openpgp.encrypt(options).then(function(ciphertext) {
+	    return ciphertext.data; // get raw encrypted packets as Uint8Array 
 	});
+
+	return encryptedMsg
 
 }
 
-exports.Decrypt = function(msg, privateKey){
+exports.decrypt = function(msg, passphrase){
 	console.log('decrypt')
-	var encrypted = key.enc
+	var privateKeys = keyring.privateKeys.keys
+	var decryptedMsg;
 
-	options = {
-	    message: openpgp.message.readArmored(encrypted),     // parse armored message
-	    privateKey: openpgp.key.readArmored(privkey).keys[0], // for decryption
-	    password: 'secret stuff'
-	};
+	privateKeys.forEach(function(key){
+		key.decrypt(passphrase)
+		// console.log(key.primaryKey.getKeyId().toHex())
+		options = {
+		    message: openpgp.message.readArmored(msg),     // parse armored message
+		    privateKey: key // for decryption
+		};
 
-	console.log('de')
+		decryptedMsg = openpgp.decrypt(options).then(function(plaintext) {
+		    return plaintext.data; // 'Hello, World!'
+		});
+	})
 
-	openpgp.decrypt(options).then(function(plaintext) {
-	    console.log('antes')
-	    console.log(plaintext.data)
-	    console.log('dsps')
-	    return plaintext.data; // 'Hello, World!'
-	});
-
-	console.log('antes')
-	// generate()
+	return decryptedMsg
 }
 
 exports.generate = function(){
@@ -205,12 +177,11 @@ exports.getPublicKeys = function(){
 	 // console.log('dsps')
 	 // console.log(pgpKeyring.getAllKeys())
 	 // pgpKeyring.store()
-	// var table = document.getElementById("publicKeysTable");
 	return publicKeys
 }
 
 exports.openWindow = function(name, devTools){
-	let win = new BrowserWindow({width:400, height:200})
+	let win = new BrowserWindow({width:400, height:400})
 	win.loadURL(`file://${__dirname}/`+name)
 	
 	if (devTools) {
