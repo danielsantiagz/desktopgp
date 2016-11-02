@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="./sign.js" defer></script>
+  </head>
+  <body>
+    <h1>Sign Your Message</h1>
+
+	    <textarea id = "message" rows="4" cols="50">
+		Enter the message to be signed
+		</textarea>
+
+    <select id = "selectPrivateKey">
+    </select>
+    Passphrase: <input type="password" id="passphrase">
+
+	  <input type="button" value="Submit" onclick="signMsg()">
+  </body>
+</html>

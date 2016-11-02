@@ -63,7 +63,7 @@ exports.encrypt = function(msg, publicKeyId){
 	};
 
 	encryptedMsg = openpgp.encrypt(options).then(function(ciphertext) {
-	    return ciphertext.data; // get raw encrypted packets as Uint8Array 
+	    return ciphertext.data; // get raw encrypted packets as Uint8Array
 	});
 
 	return encryptedMsg
@@ -98,7 +98,7 @@ exports.decrypt = function(msg, passphrase){
     		}
 		});
 
-		
+
 	})
 
 	return decryptedMsg
@@ -142,29 +142,41 @@ exports.generate = function(){
 
 //This is the function that takes care of signing
 //messages using the privatekey
-exports.Sign = function(msg, privateKey){
+// var pass = 'jon'
+// console.log(keyring.privateKeys.keys)
+exports.Sign = function(msg, privateKey, password){
   console.log("signing")
 
   options ={//variable containing the options for the signing function
-    data: "hola", // message to be signed
-    privateKeys: openpgp.key.readArmored(privkey2).keys, //read the key from armor
+    // data: "hola", // message to be signed
+    // privateKeys: openpgp.key.readArmored(privkey2).keys, //read the key from armor
+    data: msg,
+    // privateKeys: openpgp.key.readArmored(privateKey).keys,
+    privateKeys: keyring.privateKeys.getForId(privateKey),
     armor: true // true if you want ascii armored, false for message object
     // armor: false
   };
-  console.log(options.privateKeys[0].decrypt('jon')) //aparently the way to decrypt private keys
+  options.privateKeys.decrypt(password)
+  console.log(options.privateKeys)
 
+  // console.log(options.privateKeys[0].decrypt('jon')) //aparently the way to decrypt private keys
+  // options.privateKeys[0].decrypt(password)
   //random debugging messages
   console.log("/////////////after the test/////////////")
   console.log(options.privateKeys)
 
 //|||||||||||||||ACTUALLY DOING THE SIGNING OF THE MESSAGE
-  openpgp.sign(options).then(function(signedMessage){//where the magic happens
+  var signed = openpgp.sign(options).then(function(signedMessage){//where the magic happens
     console.log('before signing') // random debug comment
     console.log(signedMessage.data) // random debug comment (to se the actuall result of the function)
     console.log('after signing')//random debug comment
     // msg = signedMessage.data // using this value for the Verify function
-    return signedMessage.data
+    return {
+      msg : signedMessage.data,
+      error: null
+    }
   });
+  return signed
 }
 
 
@@ -192,11 +204,14 @@ exports.getPublicKeys = function(){
 	 // pgpKeyring.store()
 	return publicKeys
 }
-
+exports.getPrivateKeys = function(){
+  var privateKeys = keyring.privateKeys.keys
+  return privateKeys
+}
 exports.openWindow = function(name, devTools){
 	let win = new BrowserWindow({width:400, height:400})
 	win.loadURL(`file://${__dirname}/`+name)
-	
+
 	if (devTools) {
 		win.webContents.openDevTools()
 	};
