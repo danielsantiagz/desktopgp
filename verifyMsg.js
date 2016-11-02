@@ -21,7 +21,8 @@ function VerifyInputMsg(){
   // console.log(msg.split('\n'))
   // console.log(key.pub2)
 
-  var res = main.Verify(msg, key.pub2).then(function(result){
+  // var res = main.Verify(msg, key.pub2).then(function(result){
+	var res = main.Verify(msg).then(function(result){
     if (result.signatures[0].valid){
       options = {
         type: "info" ,
