@@ -273,7 +273,20 @@ exports.Verify= function (msg){
     // console.log(verified.signatures.valid)//debuggin message
     // console.log(verified.signatures.keyid)//debuggin message
     console.log("after")
-    return verified
+    return {
+      mess: verified.data,
+      KeyID: verified.signatures[0].keyid.toHex() ,
+      isSigned: verified.signatures[0].valid,
+      error: null
+    }
+  }, function(error){
+    return {
+      mess: msg,
+      KeyID: verified.signatures[0].keyid.toHex() ,
+      isSigned: null,
+      error: error
+
+    }
   })
   return ver ;
 }
