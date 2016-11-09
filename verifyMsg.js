@@ -3,7 +3,7 @@ const main = remote.require('./main.js')
 var key = require('./keys2.js');
 var noti;
 var para = document.createElement('p');
-var options;
+var options, message, KeyID, isSigned, e;
 
 function toHex(str) {
 	var hex = '';
@@ -21,32 +21,28 @@ function VerifyInputMsg(){
   // console.log(msg.split('\n'))
   // console.log(key.pub2)
 
-  var res = main.Verify(msg, key.pub2).then(function(result){
-    if (result.signatures[0].valid){
-      options = {
-        type: "info" ,
-        buttons: ["OK"],
-        title: "Message Verification",
-        message: "The message was signed correctly"
-      }
-      remote.dialog.showMessageBox(options)
-      console.log(typeof result.signatures[0].keyid.bytes);
-      console.log(toHex(result.signatures[0].keyid.bytes))
-    }
-    else {
-      // options = {
-      //   type: "error",
-      //   title: "Message Verification" ,
-      //   message: "The message was not properly signed"
-      // }
-      remote.dialog.showErrorBox("Message Verification Error", "The message was compromised or not signed properly")
+  // var res = main.Verify(msg, key.pub2).then(function(result){
+	var res = main.Verify(msg).then(function(result){
+		message = result.mess ,
+		KeyID = result.KeyID,
+		isSigned = result.isSigned,
+		error = result.error
 
-    }
-    // console.log(result)
-    // console.log(result.signatures[0].valid)
-    // console.log(result.signatures[0].keyid.bytes)
-    // remote.dialog.showErrorBox('hello', "world")
-    // remote.dialog.showErrorBox()
+		if (error){
+			remote.dialog.showErrorBox("Message Verification Error", error)
+		}
+
+		else{
+
+			options ={
+				type: 'info',
+				buttons: ["OK"],
+				title: "Message Verification Success",
+				message: "Message: " + message + "\nSigned with: <KeyID: " + KeyID.toString() + " >"
+			}
+			remote.dialog.showMessageBox(options)
+		}
+
     return result
   });
 
