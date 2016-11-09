@@ -104,12 +104,12 @@ exports.decrypt = function(msg, passphrase){
 	return decryptedMsg
 }
 
-exports.generate = function(){
+exports.generate = function(name, email, passphrase){
 	console.log('entre')
 	var options = {
-	    userIds: [{ name:'Jon papa', email:'jonpapa@example.com' }], // multiple user IDs
+	    userIds: [{ name:name, email:email }], // multiple user IDs
 	    numBits: 1024,                                            // RSA key size
-	    passphrase: 'jon'         // protects the private key
+	    passphrase: passphrase         // protects the private key
 	};
 
 	openpgp.generateKey(options).then(function(key) {
