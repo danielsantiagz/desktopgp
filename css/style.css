@@ -1,0 +1,46 @@
+body {
+	background-color: #f5f5f5;
+}
+
+#mainDivButtons button{
+	width: 100%;
+  	border-radius: 0;
+  	color: white;
+  	background-color: #6496c8;
+  	background-image: none;
+  	border: none;
+	font-size: 15px;
+    padding: 5%;
+}
+
+#mainDivButtons button:hover{
+	width: 100%;
+  	border-radius: 0;
+  	color: white;
+	background-color: #346392;
+  	background-image: none;
+  	border: none;
+	font-size: 15px;
+    padding: 5%;
+    cursor:pointer;
+}
+
+#divGenerateForm{
+    padding: 3%;
+}
+
+#divImportForm{
+	padding: 3%;
+}
+
+#divGenerateForm button:hover{
+	cursor: pointer;
+}
+
+.pane{
+	padding: 5%;
+}
+
+#quitBtn{
+	background-color: #B71701!important;
+}

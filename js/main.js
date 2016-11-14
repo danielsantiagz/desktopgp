@@ -23,7 +23,9 @@ openpgp.config.aead_protect = true // activate fast AES-GCM mode (not yet OpenPG
 
 var tray = electron.Tray
 var mb = menubar()
-mb.setOption('index', `file://${__dirname}/index.html`)
+mb.setOption('index', `file://${__dirname}/../templates/index.html`)
+mb.setOption('width', 200)
+mb.setOption('height', 328)
 
 mb.on('ready', function ready () {
 
@@ -35,20 +37,48 @@ mb.on('ready', function ready () {
   	// your app code here
 })
 
+let win;
+
 app.on('ready', () => {
-  let win = new BrowserWindow({width:800, height:600})
-  win.loadURL(`file://${__dirname}/index.html`)
+  win = new BrowserWindow({width:800, height:600, show:false})
+  win.loadURL(`file://${__dirname}/../templates/importKey.html`)
   win.webContents.openDevTools()
+
+  win.on('close', (e) => {
+
+    //This will prevent the window to be destroyed
+    e.preventDefault()
+
+    // instead we hide the window for further use
+    win.hide()
+  })
+
 })
 
-exports.openWindow = () => {
-  let win = new BrowserWindow({width:400, height:200})
-  win.loadURL(`file://${__dirname}/bear.html`)
+exports.openWindow = function(name, devTools){
+  win.loadURL(`file://${__dirname}/../templates/`+name)
+  win.once('ready-to-show', () => {
+    win.show()
+  })
+
+  if (devTools) {
+    win.webContents.openDevTools()
+  };
 }
-exports.openVerifyWindow = () => {
-  let win = new BrowserWindow({width:800, height:600})
-  win.loadURL(`file://${__dirname}/verifyMsg.html`)
+
+exports.quit = function(){
+  win.destroy()
+  app.quit()
 }
+
+exports.show = function(){
+  win.show()
+}
+
+exports.hide = function(){
+  main.hide()
+}
+
 exports.encrypt = function(msg, publicKeyId){
 	console.log('encrypt')
 
@@ -207,14 +237,6 @@ exports.getPublicKeys = function(){
 exports.getPrivateKeys = function(){
   var privateKeys = keyring.privateKeys.keys
   return privateKeys
-}
-exports.openWindow = function(name, devTools){
-	let win = new BrowserWindow({width:400, height:400})
-	win.loadURL(`file://${__dirname}/`+name)
-
-	if (devTools) {
-		win.webContents.openDevTools()
-	};
 }
 
 exports.importKey = function(key){

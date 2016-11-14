@@ -1,3 +1,5 @@
+const jQuery = require('jquery')
+const $ = jQuery
 const remote = require('electron').remote
 const main = remote.require('./main.js')
 
@@ -12,7 +14,6 @@ const main = remote.require('./main.js')
 // 	main.openWindow()
 // }
 
-
 function encryptFunc(){
 	main.encrypt('msg', 'publicKey')
 }
@@ -25,25 +26,19 @@ function signFunc(){
 	main.Sign('msg', 'privateKey')
 }
 
-function verifyFunc() {
-	// main.Verify('msg', 'publicKey')
-	main.openVerifyWindow() 
-
-}
-
-function KeyManageFunc(){
-	main.openWindow()
-}
-
 function getPublicKeys(){
 	main.openWindow('publicKeys.html', false)
 }
 
-function newWindow(name){
-	main.openWindow(name, false)
+function openWindow(name){
+	main.openWindow(name, true)
 }
 
 function importKey(){
 	key = document.getElementById("key").value;
 	main.importKey(key)
+}
+
+function quit(){
+	main.quit()
 }

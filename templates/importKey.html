@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/photon.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/generate.js" defer></script>
+    <script type="text/javascript" src="../js/public.js" defer></script>
+    <script type="text/javascript" src="../js/encrypt.js" defer></script>
+    <script type="text/javascript" src="../js/decrypt.js" defer></script>
+    <script type="text/javascript" src="../js/sign.js" defer></script>
+    <script type="text/javascript" src="../js/verifyMsg.js"></script>
+    <!-- // <script> require('../js/index.js') </script>/ -->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- /Bootstrap -->
+
+  </head>
+  <body>
+
+    <div class="window">
+      <div class="window-content">
+        <div class="pane-group">
+
+          <!-- Sidebar -->
+
+          <div class="pane-sm sidebar">
+            <nav class="nav-group">
+              
+              <h5 class="nav-group-title">Key Management</h5>
+              <a id="import" class="nav-group-item active" href="#importKey" data-toggle="tab">
+                <span class="icon icon-plus"></span>
+                Import Key
+              </a>
+              <a class="nav-group-item" href="#generateKey" data-toggle="tab">
+                <span class="icon icon-arrows-ccw"></span>
+                Generate Key
+              </a>
+              <a class="nav-group-item" href="#displayKeys" data-toggle="tab">
+                <span class="icon icon-key"></span>
+                Display Keys
+              </a>
+
+              <h5 class="nav-group-title">Message Encryption</h5>
+
+              <a class="nav-group-item" href="#encrypt" data-toggle="tab">
+                <span class="icon icon-lock"></span>
+                Encrypt
+              </a>
+              <a class="nav-group-item" href="#decrypt" data-toggle="tab">
+                <span class="icon icon-lock-open"></span>
+                Decrypt
+              </a>
+
+
+              <h5 class="nav-group-title">Sign/Verify Message</h5>
+              
+              <a class="nav-group-item" href="#sign" data-toggle="tab">
+                <span class="icon icon-pencil"></span>
+                Sign
+              </a>
+              <a class="nav-group-item" href="#verify" data-toggle="tab">
+                <span class="icon icon-check"></span>
+                Verify
+              </a>
+
+            </nav>
+          </div>
+
+          <!-- /Sidebar -->
+
+          <!-- Content -->
+          <div class="tab-content clearfix pane">
+
+            <!-- Import Key Tab -->
+
+            <div class="tab-pane active" id="importKey">
+              <h3>
+                Import Key
+              </h3> 
+
+              <h5> Import key as text </h5>
+              <div class="form-group">
+                <textarea id = "key" rows="12" cols="50">
+                </textarea>      
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-form btn-negative">Cancel</button>
+                <button type="submit" class="btn btn-form btn-primary" onclick="importKey()">Import</button>
+              </div>
+            </div>
+
+            <!-- /Import Key Tab-->
+
+            <!-- Generate Key Tab-->
+            <div class="tab-pane" id="generateKey">
+
+              <h3>
+                Generate Key
+              </h3>
+
+              <div class="form-group">
+                <label>Name</label>
+                <input id="name" type="text" class="form-control" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label>Email address</label>
+                <input id="email" type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input id="passphrase" type="password" class="form-control" placeholder="Password">
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-form btn-negative">Cancel</button>
+                <button type="submit" class="btn btn-form btn-primary" onclick="generate()">Generate</button>
+              </div>
+            </div>
+
+            <!-- /Generate Key Tab-->
+
+            <!-- Display Keys Tab -->
+            <div class="tab-pane" id="displayKeys">
+              <table id = "publicKeysTable" class="table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Key ID</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+            <!-- /Display Keys Tab -->
+
+            <!-- Encrypt Tab -->
+            <div class="tab-pane" id="encrypt">
+              
+              <h1> Hello World from importPublicKey  !! </h1>
+
+                <textarea id = "message" rows="4" cols="50">
+              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+              </textarea>
+
+              <select id = "selectPublicKey">
+              </select>
+
+              <input type="button" value="Submit" onclick="encryptMsg()">
+
+            </div>
+            <!-- /Encrypt Tab -->
+
+            <!-- Decrypt Tab-->
+
+            <div class="tab-pane" id="decrypt">
+              <h1> Hello World from importPublicKey  !! </h1>
+
+                <textarea id = "message" rows="4" cols="50">
+              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+              </textarea>
+
+              Passphrase: <input type="password" id="passphrase">
+              
+              <input type="button" value="Submit" onclick="decryptMsg()">
+            </div>              
+
+            <!-- /Decrypt Tab-->
+
+            <!-- Sign Tab -->
+            <div class="tab-pane" id="sign">
+              <h1>Sign Your Message</h1>
+
+                <textarea id = "message" rows="4" cols="50">
+              Enter the message to be signed
+              </textarea>
+
+              <select id = "selectPrivateKey">
+              </select>
+              Passphrase: <input type="password" id="passphrase">
+
+              <input type="button" value="Submit" onclick="signMsg()">
+            </div>
+
+            <!-- /Sign Tab -->
+
+            <!-- Verify Tab -->
+            <div class="tab-pane" id="verify">
+              <h1>Verify your message </h1>
+
+                <textarea id="UnVerMSG" rows="4" cols="50">
+              paste your message
+              </textarea>
+              <input type="button" value="Submit" onclick="VerifyInputMsg()">
+            </div>
+
+            <!-- /Verify Tab -->
+
+
+          </div>
+
+          <!-- /Content -->
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- This script is changing the active tab  -->
+    <script type="text/javascript">
+      $(".nav-group a").click(function(){
+        
+        var activeTab = $(".nav-group-item.active")
+        activeTab.removeClass('active')
+
+        $( this ).addClass('active');
+
+      })
+    </script>
+  </body>
+</html>

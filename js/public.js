@@ -1,5 +1,5 @@
-const remote = require('electron').remote
-const main = remote.require('./main.js')
+// const remote = require('electron').remote
+// const main = remote.require('./main.js')
 
 
 keys = main.getPublicKeys()
@@ -14,8 +14,9 @@ keys.forEach(function(key){
 	// Find a <table> element with id="myTable":
 	var table = document.getElementById("publicKeysTable");
 
+	var tbody = table.tBodies[0]
 	// Create an empty <tr> element and add it to the 1st position of the table:
-	var row = table.insertRow();
+	var row = tbody.insertRow();
 
 	// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
 	var cell1 = row.insertCell(0);

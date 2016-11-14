@@ -1,6 +1,6 @@
-const remote = require('electron').remote
-const main = remote.require('./main.js')
-var key = require('./keys2.js');
+// const remote = require('electron').remote
+// const main = remote.require('./main.js')
+// var key = require('./keys2.js');
 var noti;
 var para = document.createElement('p');
 var options, message, KeyID, isSigned, e;
