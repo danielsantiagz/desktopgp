@@ -20,7 +20,7 @@ keys.forEach(function(key){
 function signMsg(){
 	var msg = document.getElementById("message").value;
 	var pubKeyId = document.getElementById("selectPrivateKey").value;
-  var password = document.getElementById("passphrase").value;
+  var password = document.getElementById("signature-passphrase").value;
 
 	main.Sign(msg, pubKeyId, password).then(function(result){
 		var res = result.msg

@@ -30,7 +30,7 @@
 
           <div class="pane-sm sidebar">
             <nav class="nav-group">
-              
+
               <h5 class="nav-group-title">Key Management</h5>
               <a id="import" class="nav-group-item active" href="#importKey" data-toggle="tab">
                 <span class="icon icon-plus"></span>
@@ -58,7 +58,7 @@
 
 
               <h5 class="nav-group-title">Sign/Verify Message</h5>
-              
+
               <a class="nav-group-item" href="#sign" data-toggle="tab">
                 <span class="icon icon-pencil"></span>
                 Sign
@@ -81,12 +81,12 @@
             <div class="tab-pane active" id="importKey">
               <h3>
                 Import Key
-              </h3> 
+              </h3>
 
               <h5> Import key as text </h5>
               <div class="form-group">
                 <textarea id = "key" rows="12" cols="50">
-                </textarea>      
+                </textarea>
               </div>
 
               <div class="form-actions">
@@ -144,11 +144,11 @@
 
             <!-- Encrypt Tab -->
             <div class="tab-pane" id="encrypt">
-              
+
               <h1> Hello World from importPublicKey  !! </h1>
 
                 <textarea id = "message" rows="4" cols="50">
-              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
               </textarea>
 
               <select id = "selectPublicKey">
@@ -165,13 +165,13 @@
               <h1> Hello World from importPublicKey  !! </h1>
 
                 <textarea id = "message" rows="4" cols="50">
-              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
               </textarea>
 
               Passphrase: <input type="password" id="passphrase">
-              
+
               <input type="button" value="Submit" onclick="decryptMsg()">
-            </div>              
+            </div>
 
             <!-- /Decrypt Tab-->
 
@@ -185,7 +185,7 @@
 
               <select id = "selectPrivateKey">
               </select>
-              Passphrase: <input type="password" id="passphrase">
+              Passphrase: <input type="password" id="signature-passphrase">
 
               <input type="button" value="Submit" onclick="signMsg()">
             </div>
@@ -212,11 +212,11 @@
       </div>
 
     </div>
-    
+
     <!-- This script is changing the active tab  -->
     <script type="text/javascript">
       $(".nav-group a").click(function(){
-        
+
         var activeTab = $(".nav-group-item.active")
         activeTab.removeClass('active')
 
