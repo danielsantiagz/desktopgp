@@ -146,16 +146,23 @@
             <!-- Encrypt Tab -->
             <div class="tab-pane" id="encrypt">
               
-              <h1> Hello World from importPublicKey  !! </h1>
+              <h3> Encrypt Message </h3>
+              <div class="form-group">
+                  <textarea id = "message" class="form-control" rows="12" placeholder="Insert your message here...">
+                  </textarea>
+              </div>
 
-                <textarea id = "message" rows="4" cols="50">
-              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
-              </textarea>
-
-              <select id = "selectPublicKey">
-              </select>
-
-              <input type="button" value="Submit" onclick="encryptMsg()">
+              <div class="form-group">
+                <div class="row">
+                <div class="col-sm-4">
+                  <select id = "selectPublicKey" class="form-control">
+                  </select>
+                </div>
+                <div class="col-sm-4 col-sm-offset-4">
+                  <input type="button" value="Submit" onclick="encryptMsg()" class="form-control btn btn-form btn-primary" >
+                </div>
+                </div>
+              </div>
 
             </div>
             <!-- /Encrypt Tab -->
@@ -163,44 +170,64 @@
             <!-- Decrypt Tab-->
 
             <div class="tab-pane" id="decrypt">
-              <h1> Hello World from importPublicKey  !! </h1>
+              <h3> Decrypt Message </h3>
+              <div class="form-group">
+                  <textarea id = "message" rows="12" class="form-control" placeholder="Insert your encrypted message here..."> 
+                </textarea>
+              </div>
 
-                <textarea id = "message" rows="4" cols="50">
-              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
-              </textarea>
-
-              Passphrase: <input type="password" id="passphrase">
-              
-              <input type="button" value="Submit" onclick="decryptMsg()">
+              <div class="form-group">
+                <div class="row">
+                <div class="col-sm-4">
+                  <label for="passphrase"> Passphrase: </label>
+                  <input type="password" id="passphrase" class="form-control">
+                </div>
+                <div class="col-sm-4 col-sm-offset-4">
+                  <input type="button" value="Submit" onclick="decryptMsg()" class="form-control btn btn-form btn-primary">
+                </div>
+                </div>
+              </div>
             </div>              
 
             <!-- /Decrypt Tab-->
 
             <!-- Sign Tab -->
             <div class="tab-pane" id="sign">
-              <h1>Sign Your Message</h1>
+              <h3>Sign Your Message</h3>
+              <div class="form-group">
+                <textarea id = "message" rows="12" class="form-control">
+                  Enter the message to be signed
+                </textarea>
+              </div>
 
-                <textarea id = "message" rows="4" cols="50">
-              Enter the message to be signed
-              </textarea>
+              <div class="form-group">
+                <select id = "selectPrivateKey" class="form-control">
+                </select>
+              </div>
 
-              <select id = "selectPrivateKey">
-              </select>
-              Passphrase: <input type="password" id="passphrase">
+              <div class="form-group">
+                Passphrase: <input type="password" id="passphrase" class="form-control">
+              </div>
 
-              <input type="button" value="Submit" onclick="signMsg()">
+              <div class="form-group">
+                <input type="button" value="Submit" onclick="signMsg()" class="form-control btn btn-form btn-primary">
+              </div>
             </div>
 
             <!-- /Sign Tab -->
 
             <!-- Verify Tab -->
             <div class="tab-pane" id="verify">
-              <h1>Verify your message </h1>
+              <h3>Verify your message </h3>
 
-                <textarea id="UnVerMSG" rows="4" cols="50">
-              paste your message
-              </textarea>
-              <input type="button" value="Submit" onclick="VerifyInputMsg()">
+              <div class="form-group">
+                <textarea id="UnVerMSG" rows="12" class="form-control">
+                  Paste your message
+                </textarea>
+              </div>
+              <div class="form-group">
+                <input type="button" value="Submit" onclick="VerifyInputMsg()" class="form-control btn btn-form btn-primary">
+              </div>
             </div>
 
             <!-- /Verify Tab -->
