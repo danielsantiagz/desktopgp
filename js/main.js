@@ -33,6 +33,7 @@ mb.on('ready', function ready () {
      if (process.platform === "linux"){
        mb.tray.setToolTip('show app')
      }
+    console.log(mb.tray)
   	console.log('app is ready')
   	// your app code here
 })

@@ -18,7 +18,7 @@ keys.forEach(function(key){
 // alert("hello")
 
 function signMsg(){
-	var msg = document.getElementById("message").value;
+	var msg = document.getElementById("sign-message").value;
 	var pubKeyId = document.getElementById("selectPrivateKey").value;
   var password = document.getElementById("signature-passphrase").value;
 
