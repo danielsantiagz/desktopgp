@@ -2,6 +2,8 @@ const jQuery = require('jquery')
 const $ = jQuery
 const remote = require('electron').remote
 const main = remote.require('./main.js')
+const {BrowserWindow, dialog} = remote
+
 
 // var button = document.createElement('button')
 // button.addEventListener('click', () => {
@@ -41,4 +43,13 @@ function importKey(){
 
 function quit(){
 	main.quit()
+}
+
+function clearF(tabId){
+	tab = '#'+tabId
+	$(tab).find("input, textarea").val('')
+}
+
+function openD(msg){
+	dialog.showMessageBox({type: "info", message: msg, buttons: ["OK"]})
 }

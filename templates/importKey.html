@@ -85,13 +85,13 @@
 
               <h5> Import key as text </h5>
               <div class="form-group">
-                <textarea id = "key" rows="12" cols="50">
+                <textarea id = "key" placeholder="Insert Key to import Here" rows="12" cols="50">
                 </textarea>      
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="btn btn-form btn-negative">Cancel</button>
                 <button type="submit" class="btn btn-form btn-primary" onclick="importKey()">Import</button>
+                <button type="submit" class="btn btn-form btn-default" onclick="clearF('importKey')">Clear</button>
               </div>
             </div>
 
@@ -118,8 +118,9 @@
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="btn btn-form btn-negative">Cancel</button>
-                <button type="submit" class="btn btn-form btn-primary" onclick="generate()">Generate</button>
+                <button id="generateBtn" data-loading-text="Generating key pair..." type="submit" class="btn btn-form btn-primary" onclick="generate()">Generate</button>
+                <!-- <button type="submit" class="btn btn-form btn-default" onclick="clearF('generateKey')">Clear</button> -->
+
               </div>
             </div>
 
@@ -127,7 +128,7 @@
 
             <!-- Display Keys Tab -->
             <div class="tab-pane" id="displayKeys">
-              <table id = "publicKeysTable" class="table-striped">
+              <table id = "publicKeysTable" class="table table-hover">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -204,6 +205,87 @@
 
             <!-- /Verify Tab -->
 
+          <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <img src="../images/load.gif">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <!-- Key info Modal -->
+            <div class="modal fade" id="keyInfoModal" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <!-- keyinfomodal -->
+                    <div class="container">
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#mainkeyTab">Main Key</a></li>
+                        <li><a data-toggle="tab" href="#exportTab">Export</a></li>
+                      </ul>
+                      <div class="tab-content">
+                        <div id="mainkeyTab" class="tab-pane fade in active">
+                          <div class="form-group">
+                            <label class="col-sm-3" for="keyname">Name:</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="keyname" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-3" for="keyemail">Email:</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="keyemail" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-3" for="keyid">KeyID:</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="keyid" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-3" for="keycreated">Created:</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="keycreated" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-3" for="keyfingerprint">Fingerprint:</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="keyfingerprint" disabled>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="exportTab" class="tab-pane fade">
+                          <div class="form-group">
+                            <div class="container">
+                              <ul class="nav nav-pills" style="margin-top: 5%;margin-bottom: 3%;">
+                                <li class="active"><a data-toggle="pill" href="#keypublicKey">Public</a></li>
+                                <li><a data-toggle="pill" href="#keyprivateKey">Private</a></li>
+                              </ul>
+                              <div class="tab-content">
+                                <div id="keypublicKey" class="tab-pane fade in active">
+                                  <textarea id="keyPublicArmor" class="form-control" rows="12" disabled>
+                                  </textarea>
+                                </div>
+                                <div id="keyprivateKey" class="tab-pane fade">
+                                  <textarea id="keyPrivateArmor" class="form-control" rows="12" disabled>
+                                  </textarea>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
 

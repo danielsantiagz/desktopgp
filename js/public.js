@@ -30,3 +30,42 @@ keys.forEach(function(key){
 	cell3.innerHTML = keyid;
 	cell4.innerHTML = created;
 })
+
+$('#publicKeysTable > tbody > tr').click(function() {
+    // row was clicked
+
+    keyid = this.cells[2].innerText
+
+    key = main.getPublicKey(keyid)
+    keypriv = main.getPrivateKey(keyid)
+
+	user = key.getUserIds()[0]
+	userEmail = user.match(/<(.*)>/)[1]
+	userName = user.split('<')[0]
+	keyid = key.primaryKey.getKeyId().toHex()
+	created = key.primaryKey.created.toDateString()
+	fingerPrint = key.primaryKey.getFingerprint()
+	publicKey = key.armor()
+	privateKey = keypriv.armor()
+
+    // console.log(main.getKey(keyid))
+    console.log(keypriv.armor())
+    console.log(keypriv.isPrivate())
+
+    $('#keyname').val(userName);
+    $('#keyemail').val(userEmail);
+    $('#keyid').val(keyid);
+    $('#keycreated').val(created);
+    $('#keyfingerprint').val(fingerPrint);
+    $('#keyPublicArmor').val(publicKey)
+    
+    if(privateKey){
+    	$('#keyPrivateArmor').val(privateKey)
+    }
+
+    $('#keyInfoModal').modal('show');
+
+
+});
+
+

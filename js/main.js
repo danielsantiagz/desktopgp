@@ -1,6 +1,6 @@
 const menubar = require('menubar')
 const electron = require('electron')
-const {app, BrowserWindow} = electron
+const {app, BrowserWindow, dialog} = electron
 const openpgp = require('openpgp')
 
 // openpgp
@@ -38,6 +38,7 @@ mb.on('ready', function ready () {
 })
 
 let win;
+exports.win;
 
 app.on('ready', () => {
   win = new BrowserWindow({width:800, height:600, show:false})
@@ -135,21 +136,26 @@ exports.decrypt = function(msg, passphrase){
 }
 
 exports.generate = function(name, email, passphrase){
-	console.log('entre')
+	// console.log('entre')
 	var options = {
 	    userIds: [{ name:name, email:email }], // multiple user IDs
 	    numBits: 1024,                                            // RSA key size
 	    passphrase: passphrase         // protects the private key
 	};
 
-	openpgp.generateKey(options).then(function(key) {
-	    var privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
-	    var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
-	    console.log('yei')
-	    console.log(privkey)
-	    console.log(pubkey)
+	keys = openpgp.generateKey(options).then(function(key) {
+	    // var privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
+	    // var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
+
+      keyring.publicKeys.importKey(key.publicKeyArmored)
+      keyring.privateKeys.importKey(key.privateKeyArmored)
+
+      keyring.store()
+
+      return key
 	});
 
+  return keys
 }
 
 //||||||||||||||||||||PRELIMINAR TESTING OF THE SIGNING FUNCTION (not working)
@@ -214,6 +220,14 @@ exports.Sign = function(msg, privateKey, password){
 // function sign_message()
 //   sigmsg = sign_message(pubkey2, privkey2, "jon", "hello")
 //   console.log(sigmsg)
+
+exports.getPublicKey = function(keyID){
+  return keyring.publicKeys.getForId(keyID)
+}
+
+exports.getPrivateKey = function(keyID){
+  return keyring.privateKeys.getForId(keyID)
+}
 
 exports.getPublicKeys = function(){
 	// key = openpgp.key.readArmored(pubkey).keys[0]
